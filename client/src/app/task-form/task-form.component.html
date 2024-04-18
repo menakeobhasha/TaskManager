@@ -1,0 +1,20 @@
+<form [formGroup]="taskForm" (ngSubmit)="taskForm.valid && addTask()" autocomplete="off">
+  <h2 class="text-center text-primary">{{formMode}} Task</h2>
+  <hr>
+
+  <app-text-input [formControl]="$any(taskForm.controls['title'])"
+    [label]="'Title'"></app-text-input>
+  <app-text-input [formControl]="$any(taskForm.controls['description'])"
+    [label]="'Description'"></app-text-input>
+  <app-date-picker [formControl]="$any(taskForm.controls['dueDate'])"
+    [label]="'Due Date'" ></app-date-picker>
+    <label class="form-check-label">
+      Task Status <input type="checkbox" formControlName="completed" class="form-check-input">
+    </label>
+
+
+  <div class="text-center">
+    <button [disabled]="!taskForm.valid" class="btn btn-success me-2" type="submit">{{formMode}} Task</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+  </div>
+</form>

@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-success mb-8" routerLink="/task/0">
+        Add New Task
+      </button>
+    </div>
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search"
+        (input)="onChange($event)"
+      />
+    </div>
+  </div>
+  <hr />
+  <h1>Task List</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th (click)="sortTasks('id')">
+          ID
+          <i class="fa" [ngClass]="{'fa-caret-up': sortByField === 'id' && !reverseSort, 'fa-caret-down': sortByField === 'id' && reverseSort}"></i>
+        </th>
+        <th (click)="sortTasks('title')">
+          Title
+          <i class="fa" [ngClass]="{'fa-caret-up': sortByField === 'title' && !reverseSort, 'fa-caret-down': sortByField === 'title' && reverseSort}"></i>
+        </th>
+        <th (click)="sortTasks('description')">
+          Description
+          <i class="fa" [ngClass]="{'fa-caret-up': sortByField === 'description' && !reverseSort, 'fa-caret-down': sortByField === 'description' && reverseSort}"></i>
+        </th>
+        <th (click)="sortTasks('dueDate')">
+          Due Date
+          <i class="fa" [ngClass]="{'fa-caret-up': sortByField === 'dueDate' && !reverseSort, 'fa-caret-down': sortByField === 'dueDate' && reverseSort}"></i>
+        </th>
+        <th (click)="sortTasks('completed')">
+          <i class="fa" [ngClass]="{'fa-caret-up': sortByField === 'completed' && !reverseSort, 'fa-caret-down': sortByField === 'completed' && reverseSort}"></i>
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.dueDate | date }}</td>
+        <td>
+          <span *ngIf="task.completed; else notCompletedLabel">Completed</span>
+          <ng-template #notCompletedLabel>Not Completed</ng-template>
+        </td>
+        <td>
+          <button
+            class="btn btn-success me-2"
+            routerLink="/task/view/{{ task.id }}"
+          >
+            View
+          </button>
+          <button class="btn btn-primary me-2" routerLink="/task/{{ task.id }}">
+            Edit
+          </button>
+          <button class="btn btn-danger" (click)="deleteTask(task.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

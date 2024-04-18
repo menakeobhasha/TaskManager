@@ -1,0 +1,34 @@
+<div class="row" *ngIf="task">
+  <h2 class="text-center text-primary">Details of {{task.title}}</h2>
+  <hr>
+  <div class="col-4"></div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <div>
+          <strong>Title</strong>
+          <p>{{task.title}}</p>
+        </div>
+        <div>
+          <strong>Description</strong>
+          <p>{{task.description}}</p>
+        </div>
+        <div>
+          <strong>Due Date</strong>
+          <p>{{task.dueDate | date: 'dd MMM yyyy'}}</p>
+        </div>
+        <div>
+          <span *ngIf="task.completed; else notCompletedLabel">Completed</span>
+          <ng-template #notCompletedLabel>Not Completed</ng-template>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="text-center mb-md-2">
+          <button  class="btn btn-success me-2" routerLink="/task/{{task.id}}" type="submit">Edit Task</button>
+          <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
